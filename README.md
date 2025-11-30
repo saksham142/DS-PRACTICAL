@@ -20,3 +20,15 @@ OUTPUT 4
 OUTPUT 5 
 
 ![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/063d2331cd909df6ba345ecf780da93033468533/Screenshot%202025-11-30%20205321.png)
+
+OUTPUT 6
+
+![image alt](
+
+![image alt](
+
+![image alt](
+
+OUTPUT 7 
+
+![image alt](
