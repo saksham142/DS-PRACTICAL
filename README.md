@@ -15,7 +15,7 @@ OUTPUT 3
 
 OUTPUT 4
 
-![image alt](
+![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/9717c73bf62beb91c34c18598f28c1b953d1c5e6/Screenshot%202025-11-30%20205252.png)
 
 OUTPUT 5 
 
