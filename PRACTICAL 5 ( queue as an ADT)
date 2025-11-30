@@ -1,1 +1,43 @@
+#include <iostream>
+using namespace std;
+
+class Queue {
+    int arr[100], front, rear, count;
+public:
+    Queue() : front(0), rear(-1), count(0) {}
+
+    void enqueue(int x) {
+        if (count == 100) return;
+        rear = (rear + 1) % 100;
+        arr[rear] = x;
+        count++;
+    }
+
+    int dequeue() {
+        if (!count) return -1;
+        int x = arr[front];
+        front = (front + 1) % 100;
+        count--;
+        return x;
+    }
+
+    void display() {
+        for (int i = 0; i < count; i++)
+            cout << arr[(front + i) % 100] << " ";
+        cout << "\n";
+    }
+};
+
+int main() {
+    Queue q;
+    int c, x;
+    while (true) {
+        cout << "\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\n";
+        cin >> c;
+        if (c == 1) { cin >> x; q.enqueue(x); }
+        else if (c == 2) cout << q.dequeue() << "\n";
+        else if (c == 3) q.display();
+        else break;
+    }
+}
 
