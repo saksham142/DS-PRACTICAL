@@ -1,1 +1,117 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
 
+struct AVLNode {
+    int key, height;
+    AVLNode *left, *right;
+    AVLNode(int k) : key(k), height(1), left(nullptr), right(nullptr) {}
+};
+
+class AVL {
+    AVLNode* root;
+
+    int h(AVLNode* n) { return n ? n->height : 0; }
+    int bal(AVLNode* n) { return n ? h(n->left) - h(n->right) : 0; }
+
+    AVLNode* rRotate(AVLNode* y) {
+        AVLNode* x = y->left;
+        AVLNode* T2 = x->right;
+
+        x->right = y;
+        y->left = T2;
+
+        y->height = max(h(y->left), h(y->right)) + 1;
+        x->height = max(h(x->left), h(x->right)) + 1;
+        return x;
+    }
+
+    AVLNode* lRotate(AVLNode* x) {
+        AVLNode* y = x->right;
+        AVLNode* T2 = y->left;
+
+        y->left = x;
+        x->right = T2;
+
+        x->height = max(h(x->left), h(x->right)) + 1;
+        y->height = max(h(y->left), h(y->right)) + 1;
+        return y;
+    }
+
+    AVLNode* insertNode(AVLNode* n, int k) {
+        if (!n) return new AVLNode(k);
+
+        if (k < n->key)
+            n->left = insertNode(n->left, k);
+        else if (k > n->key)
+            n->right = insertNode(n->right, k);
+        else
+            return n; // no duplicates
+
+        n->height = 1 + max(h(n->left), h(n->right));
+        int b = bal(n);
+
+        // Left Left
+        if (b > 1 && k < n->left->key)
+            return rRotate(n);
+
+        // Right Right
+        if (b < -1 && k > n->right->key)
+            return lRotate(n);
+
+        // Left Right
+        if (b > 1 && k > n->left->key) {
+            n->left = lRotate(n->left);
+            return rRotate(n);
+        }
+
+        // Right Left
+        if (b < -1 && k < n->right->key) {
+            n->right = rRotate(n->right);
+            return lRotate(n);
+        }
+
+        return n;
+    }
+
+    AVLNode* searchNode(AVLNode* n, int k) {
+        if (!n || n->key == k) return n;
+        if (k < n->key) return searchNode(n->left, k);
+        return searchNode(n->right, k);
+    }
+
+    void inorder(AVLNode* n) {
+        if (!n) return;
+        inorder(n->left);
+        cout << n->key << " ";
+        inorder(n->right);
+    }
+
+public:
+    AVL() : root(nullptr) {}
+
+    void insert(int k) { root = insertNode(root, k); }
+    AVLNode* search(int k) { return searchNode(root, k); }
+    void displayIn() { inorder(root); cout << "\n"; }
+};
+
+int main() {
+    AVL t;
+    int c, x;
+    while (true) {
+        cout << "\n1.Insert\n2.Search\n3.Inorder\n4.Exit\n";
+        cin >> c;
+        if (c == 1) {
+            cin >> x;
+            t.insert(x);
+        } else if (c == 2) {
+            cin >> x;
+            cout << (t.search(x) ? "Found\n" : "Not found\n");
+        } else if (c == 3) {
+            t.displayIn();
+        } else {
+            break;
+        }
+    }
+    return 0;
+}
