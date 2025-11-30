@@ -27,7 +27,7 @@ OUTPUT 6
 
 ![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/514af492b0e9c389c13b2c259238e2a4e2f7df3e/Screenshot%202025-11-30%20210412.png)
 
-![image alt](
+![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/3038ea246137c275904276409617414e31b9e6a0/Screenshot%202025-11-30%20210419.png)
 
 OUTPUT 7 
 
