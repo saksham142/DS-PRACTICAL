@@ -18,6 +18,6 @@ PRACTICAL 2
 
 OUTPUT 2
 
-![image alt](
+![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/8589b96c95e7a0c9be718f9fe4b48fb828f4b209/Screenshot%202025-11-30%20203015.png)
 
 ![image alt](
