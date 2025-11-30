@@ -1,1 +1,67 @@
+#include <iostream>
+#include <sstream>
+#include <cmath>
+using namespace std;
+
+class Stack {
+    int arr[100], topIndex;
+public:
+    Stack() : topIndex(-1) {}
+    void push(int x) { arr[++topIndex] = x; }
+    int pop() { return arr[topIndex--]; }
+};
+
+int applyOp(int a, int b, char op) {
+    if (op == '+') return a + b;
+    if (op == '-') return a - b;
+    if (op == '*') return a * b;
+    if (op == '/') return a / b;
+    return pow(a, b);
+}
+
+int evalPostfix(string s) {
+    Stack st;
+    string x;
+    stringstream ss(s);
+    while (ss >> x) {
+        if (isdigit(x[0])) st.push(stoi(x));
+        else {
+            int b = st.pop();
+            int a = st.pop();
+            st.push(applyOp(a, b, x[0]));
+        }
+    }
+    return st.pop();
+}
+
+int evalPrefix(string s) {
+    Stack st;
+    string arr[100], x;
+    int n = 0;
+    stringstream ss(s);
+    while (ss >> arr[n]) n++;
+    for (int i = n - 1; i >= 0; i--) {
+        x = arr[i];
+        if (isdigit(x[0])) st.push(stoi(x));
+        else {
+            int a = st.pop();
+            int b = st.pop();
+            st.push(applyOp(a, b, x[0]));
+        }
+    }
+    return st.pop();
+}
+
+int main() {
+    int c;
+    string exp;
+    while (true) {
+        cout << "\n1.Postfix\n2.Prefix\n3.Exit\n";
+        cin >> c;
+        cin.ignore();
+        if (c == 1) { getline(cin, exp); cout << evalPostfix(exp) << "\n"; }
+        else if (c == 2) { getline(cin, exp); cout << evalPrefix(exp) << "\n"; }
+        else break;
+    }
+}
 
