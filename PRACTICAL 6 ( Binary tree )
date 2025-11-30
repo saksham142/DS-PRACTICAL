@@ -1,1 +1,94 @@
+#include <iostream>
+using namespace std;
+
+struct BSTNode {
+    int key;
+    BSTNode* left;
+    BSTNode* right;
+    BSTNode(int k) : key(k), left(nullptr), right(nullptr) {}
+};
+
+class BST {
+    BSTNode* root;
+
+    BSTNode* insertNode(BSTNode* n, int k) {
+        if (!n) return new BSTNode(k);
+        if (k < n->key) n->left = insertNode(n->left, k);
+        else if (k > n->key) n->right = insertNode(n->right, k);
+        return n;
+    }
+
+    BSTNode* searchNode(BSTNode* n, int k) {
+        if (!n || n->key == k) return n;
+        if (k < n->key) return searchNode(n->left, k);
+        return searchNode(n->right, k);
+    }
+
+    BSTNode* minNode(BSTNode* n) {
+        while (n->left) n = n->left;
+        return n;
+    }
+
+    BSTNode* deleteNode(BSTNode* n, int k) {
+        if (!n) return n;
+        if (k < n->key) n->left = deleteNode(n->left, k);
+        else if (k > n->key) n->right = deleteNode(n->right, k);
+        else {
+            if (!n->left) { BSTNode* r = n->right; delete n; return r; }
+            else if (!n->right) { BSTNode* l = n->left; delete n; return l; }
+            BSTNode* t = minNode(n->right);
+            n->key = t->key;
+            n->right = deleteNode(n->right, t->key);
+        }
+        return n;
+    }
+
+    void inorder(BSTNode* n) {
+        if (!n) return;
+        inorder(n->left);
+        cout << n->key << " ";
+        inorder(n->right);
+    }
+
+    void preorder(BSTNode* n) {
+        if (!n) return;
+        cout << n->key << " ";
+        preorder(n->left);
+        preorder(n->right);
+    }
+
+    void postorder(BSTNode* n) {
+        if (!n) return;
+        postorder(n->left);
+        postorder(n->right);
+        cout << n->key << " ";
+    }
+
+public:
+    BST() : root(nullptr) {}
+
+    void insert(int k) { root = insertNode(root, k); }
+    void deleteKey(int k) { root = deleteNode(root, k); }
+    BSTNode* search(int k) { return searchNode(root, k); }
+    void displayIn() { inorder(root); cout << "\n"; }
+    void displayPre() { preorder(root); cout << "\n"; }
+    void displayPost() { postorder(root); cout << "\n"; }
+};
+
+int main() {
+    BST t;
+    int c, x;
+    while (true) {
+        cout << "\n1.Insert\n2.Delete\n3.Search\n4.Inorder\n5.Preorder\n6.Postorder\n7.Exit\n";
+        cin >> c;
+        if (c == 1) { cin >> x; t.insert(x); }
+        else if (c == 2) { cin >> x; t.deleteKey(x); }
+        else if (c == 3) { cin >> x; cout << (t.search(x) ? "Found\n" : "Not found\n"); }
+        else if (c == 4) t.displayIn();
+        else if (c == 5) t.displayPre();
+        else if (c == 6) t.displayPost();
+        else break;
+    }
+    return 0;   // optional but good style
+}
 
