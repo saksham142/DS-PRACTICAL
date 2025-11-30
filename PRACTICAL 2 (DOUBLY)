@@ -1,1 +1,79 @@
+#include <iostream>
+using namespace std;
+
+struct DNode {
+    int data;
+    DNode* prev;
+    DNode* next;
+    DNode(int x) : data(x), prev(nullptr), next(nullptr) {}
+};
+
+class DoublyLinkedList {
+    DNode* head;
+    DNode* tail;
+public:
+    DoublyLinkedList() : head(nullptr), tail(nullptr) {}
+
+    void insertAtBeginning(int x) {
+        DNode* n = new DNode(x);
+        n->next = head;
+        if (head) head->prev = n;
+        head = n;
+        if (!tail) tail = n;
+    }
+
+    void insertAtEnd(int x) {
+        DNode* n = new DNode(x);
+        if (!tail) {
+            head = tail = n;
+            return;
+        }
+        tail->next = n;
+        n->prev = tail;
+        tail = n;
+    }
+
+    void removeFromBeginning() {
+        if (!head) return;
+        DNode* temp = head;
+        head = head->next;
+        if (head) head->prev = nullptr;
+        else tail = nullptr;
+        delete temp;
+    }
+
+    void removeFromEnd() {
+        if (!tail) return;
+        DNode* temp = tail;
+        tail = tail->prev;
+        if (tail) tail->next = nullptr;
+        else head = nullptr;
+        delete temp;
+    }
+
+    void display() {
+        DNode* cur = head;
+        while (cur) {
+            cout << cur->data << " <-> ";
+            cur = cur->next;
+        }
+        cout << "NULL\n";
+    }
+};
+
+int main() {
+    DoublyLinkedList list;
+    int choice, x;
+    while (true) {
+        cout << "\n1.Insert first\n2.Insert last\n3.Remove first\n4.Remove last\n5.Display\n6.Exit\n";
+        cin >> choice;
+
+        if (choice == 1) { cin >> x; list.insertAtBeginning(x); }
+        else if (choice == 2) { cin >> x; list.insertAtEnd(x); }
+        else if (choice == 3) list.removeFromBeginning();
+        else if (choice == 4) list.removeFromEnd();
+        else if (choice == 5) list.display();
+        else if (choice == 6) break;
+    }
+}
 
