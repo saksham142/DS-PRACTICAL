@@ -20,4 +20,4 @@ OUTPUT 2
 
 ![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/8589b96c95e7a0c9be718f9fe4b48fb828f4b209/Screenshot%202025-11-30%20203015.png)
 
-![image alt](
+![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/e8de6cbaac65340bc94dec2fdb72f3b21eb4882f/Screenshot%202025-11-30%20203028.png)
