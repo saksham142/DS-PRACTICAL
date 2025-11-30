@@ -8,7 +8,7 @@ PRACTICAL 1
 
  OUTPUT 1
  
-![image alt](
+![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/aa8c853017f2615be6f9eb869af94eb02f4aa6f8/Screenshot%202025-11-30%20202315.png)
 
 PRACTICAL 2
 
