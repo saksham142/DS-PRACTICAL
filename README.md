@@ -12,3 +12,11 @@ OUTPUT 2
 OUTPUT 3 
 
 ![image alt](https://github.com/saksham142/DS-PRACTICAL/blob/26531183011d59c6e9f29bd6ef4fb6cecd174021/Screenshot%202025-11-30%20204536.png)
+
+OUTPUT 4
+
+![image alt](
+
+OUTPUT 5 
+
+![image alt](
