@@ -1,1 +1,83 @@
+#include <iostream>
+using namespace std;
+
+struct CNode {
+    int data;
+    CNode* next;
+    CNode(int x) : data(x), next(nullptr) {}
+};
+
+class CircularLinkedList {
+    CNode* tail;
+public:
+    CircularLinkedList() : tail(nullptr) {}
+
+    void insert(int x) {
+        CNode* n = new CNode(x);
+        if (!tail) {
+            tail = n;
+            tail->next = tail;
+        } else {
+            n->next = tail->next;
+            tail->next = n;
+            tail = n;
+        }
+    }
+
+    void remove(int x) {
+        if (!tail) return;
+        CNode* cur = tail->next;
+        CNode* prev = tail;
+        do {
+            if (cur->data == x) {
+                if (cur == tail && cur == tail->next) {
+                    delete cur;
+                    tail = nullptr;
+                } else {
+                    prev->next = cur->next;
+                    if (cur == tail) tail = prev;
+                    delete cur;
+                }
+                return;
+            }
+            prev = cur;
+            cur = cur->next;
+        } while (cur != tail->next);
+    }
+
+    CNode* search(int x) {
+        if (!tail) return nullptr;
+        CNode* cur = tail->next;
+        do {
+            if (cur->data == x) return cur;
+            cur = cur->next;
+        } while (cur != tail->next);
+        return nullptr;
+    }
+
+    void display() {
+        if (!tail) return;
+        CNode* cur = tail->next;
+        do {
+            cout << cur->data << " -> ";
+            cur = cur->next;
+        } while (cur != tail->next);
+        cout << "(circle)\n";
+    }
+};
+
+int main() {
+    CircularLinkedList list;
+    int choice, x;
+    while (true) {
+        cout << "\n1.Insert\n2.Remove\n3.Search\n4.Display\n5.Exit\n";
+        cin >> choice;
+
+        if (choice == 1) { cin >> x; list.insert(x); }
+        else if (choice == 2) { cin >> x; list.remove(x); }
+        else if (choice == 3) { cin >> x; cout << (list.search(x) ? "Found\n" : "Not found\n"); }
+        else if (choice == 4) list.display();
+        else if (choice == 5) break;
+    }
+}
 
